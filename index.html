@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Discover a collection of powerful and easy-to-use online free tools including calculators, converters, text utilities, and more – all in one place. No downloads or sign-ups required!">
+<meta name="keywords" content="tools, online tools, free tools, html tools,1000+ free tools,free all tools, javascript tools">
+<meta name="author" content="sabbir">
+    
+    <title> All-in-One Toolkit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="tools.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --text: #2d3748;
+            --text-light: #718096;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 2.5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--text-light);
+        }
+
+        /* Search Section */
+        .search-section {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 0 20px;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 50px;
+            border: 2px solid var(--border);
+            font-size: 1.1rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .search-container i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        /* Categories */
+        .categories {
+            margin-bottom: 2.5rem;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .categories-container {
+            display: flex;
+            gap: 12px;
+            padding: 5px;
+        }
+
+        .category-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .category-btn:hover {
+            background-color: #f1f5f9;
+        }
+
+        .category-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 4rem;
+        }
+
+        .tool-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-image {
+            height: 160px;
+            background-color: #e0e7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tool-image img {
+            max-width: 100%;
+            max-height: 100px;
+        }
+
+        .tool-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool-category {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .tool-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .tool-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .tool-link {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .tool-link:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero {
+                padding: 2.5rem 0 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .tool-image {
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-tools"></i>
+                <span>by: Sabbir</span>
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>All-in-One Online Tools for Everyday Needs</h1>
+            <p>This website offers a collection of free, easy-to-use online tools – including text utilities, converters, calculators, web tools, and more – all in one place. No downloads required. Boost your productivity and get things done faster with our multiple smart tools.</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for tools...">
+            <i class="fas fa-search"></i>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <div class="categories-container">
+                <button class="category-btn active" data-category="all">All Tools</button>
+                <button class="category-btn" data-category="seo">SEO Tools</button>
+                <button class="category-btn" data-category="image">Image Tools</button>
+                <button class="category-btn" data-category="text">Text Tools</button>
+                <button class="category-btn" data-category="analytics">Analytics</button>
+                <button class="category-btn" data-category="social">Social Media</button>
+                <button class="category-btn" data-category="productivity">Productivity</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <section class="container">
+        <div class="tools-grid">
+            
+            
+            <!-- সব tools এখান থেকে শুরু হয়েছে -->
+            
+            
+            <!-- Tool 1 -->
+            <!-- Replace with your categories -->
+            <div class="tool-card" data-categories="seo">
+    <div class="tool-image">
+        <!-- Replace with your tool image -->
+        <img src="1.png"
+        <i style="font-size: 4rem; color: #3b82f6;"></i>
+    </div>
+    <div class="tool-content">
+        <!-- Replace with your categories -->
+        <span class="tool-category">SEO Tools</span>
+        <!-- Replace with your tool name -->
+        <h3 class="tool-name">Your Tool Name</h3>
+        
+        <p class="tool-description">Your tool description goes here</p>
+        <a href="your-tool-page-link" class="tool-link">Use Tool</a>
+    </div>
+</div>
+            <!-- Tool 1 -->
+            <div class="tool-card" data-categories="seo">
+                <div class="tool-image">
+                    <i class="fas fa-chart-line" style="font-size: 4rem; color: #4361ee;"></i>
+                </div>
+                <div class="tool-content">
+                    <span class="tool-category">SEO Tools</span>
+                    <h3 class="tool-name">Keyword Analyzer</h3>
+                    <p class="tool-description">Find the best keywords for your blog posts and analyze their search volume and competition.</p>
+                    <a href="#" class="tool-link">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Tool 2 -->
+            <div class="tool-card" data-categories="image">
+                <div class="tool-image">
+                    <i class="fas fa-image" style="font-size: 4rem; color: #7209b7;"></i>
+                </div>
+                <div class="tool-content">
+                    <span class="tool-category">Image Tools</span>
+                    <h3 class="tool-name">Image Compressor</h3>
+                    <p class="tool-description">Reduce image file size without losing quality to improve your blog loading speed.</p>
+                    <a href="#" class="tool-link">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Tool 3 -->
+            <div class="tool-card" data-categories="text">
+                <div class="tool-image">
+                    <i class="fas fa-font" style="font-size: 4rem; color: #10b981;"></i>
+                </div>
+                <div class="tool-content">
+                    <span class="tool-category">Text Tools</span>
+                    <h3 class="tool-name">Plagiarism Checker</h3>
+                    <p class="tool-description">Ensure your content is original and avoid duplicate content issues with our advanced checker.</p>
+                    <a href="#" class="tool-link">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Tool 4 -->
+            <div class="tool-card" data-categories="analytics">
+                <div class="tool-image">
+                    <i class="fas fa-chart-pie" style="font-size: 4rem; color: #f59e0b;"></i>
+                </div>
+                <div class="tool-content">
+                    <span class="tool-category">Analytics</span>
+                    <h3 class="tool-name">Traffic Analyzer</h3>
+                    <p class="tool-description">Track your blog's performance, visitor behavior, and traffic sources.</p>
+                    <a href="#" class="tool-link">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Tool 5 -->
+            <div class="tool-card" data-categories="social">
+                <div class="tool-image">
+                    <i class="fas fa-share-alt" style="font-size: 4rem; color: #ec4899;"></i>
+                </div>
+                <div class="tool-content">
+                    <span class="tool-category">Social Media</span>
+                    <h3 class="tool-name">Social Scheduler</h3>
+                    <p class="tool-description">Schedule your blog posts across multiple social media platforms at optimal times.</p>
+                    <a href="#" class="tool-link">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Tool 6 -->
+            <div class="tool-card" data-categories="productivity">
+                <div class="tool-image">
+                    <i class="fas fa-tasks" style="font-size: 4rem; color: #ef4444;"></i>
+                </div>
+                <div class="tool-content">
+                    <span class="tool-category">Productivity</span>
+                    <h3 class="tool-name">Content Planner</h3>
+                    <p class="tool-description">Plan your blog content calendar and organize your ideas in one place.</p>
+                    <a href="#" class="tool-link">Use Tool</a>
+                </div>
+            </div>
+            <!-- এখানে সব শেষ হয়ে গেছে -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="https://x.com/mdsabbirkhan999"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="https://m.facebook.com/md.sabbir.971361/"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="https://www.instagram.com/mdsabbir99900"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li>
+                        <li><a href="https://m.youtube.com/@mdsabbir99900"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 by: sabbir
+                <div id="auth-text"></div>
+<div id="main-content">
+  <h1></h1>
+  <p></p>
+</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Category Filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    
+                    // Show all tools if "All" is selected
+                    if (category === 'all') {
+                        toolCards.forEach(card => {
+                            card.style.display = 'flex';
+                        });
+                        return;
+                    }
+                    
+                    // Filter tools by category
+                    toolCards.forEach(card => {
+                        if (card.dataset.categories.includes(category)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Search Functionality
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                toolCards.forEach(card => {
+                    const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
+                    const toolDesc = card.querySelector('.tool-description').textContent.toLowerCase();
+                    
+                    if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
