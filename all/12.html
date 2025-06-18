@@ -1,25 +1,206 @@
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-  }
-  .fullscreen-iframe {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    border: none;
-    margin: 0;
-    padding: 0;
-    z-index: 9999;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Universal QR & Barcode Scanner</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { 
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+      color: #2d3748;
+    }
+    
+    .container {
+      max-width: 450px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    h2 {
+      color: #1a365d;
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+    
+    #scanner {
+      width: 100%;
+      min-height: 280px;
+      margin: 15px auto;
+      border: 2px dashed #cbd5e0;
+      border-radius: 8px;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #edf2f7;
+      border-radius: 8px;
+      border-left: 4px solid #4299e1;
+      font-size: 1.05rem;
+      color: #2b6cb0;
+      min-height: 60px;
+      word-break: break-word;
+    }
+    
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 25px;
+    }
+    
+    button {
+      flex: 1 1 45%;
+      min-width: 140px;
+      padding: 12px 16px;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    #start-btn {
+      background: #3182ce;
+      color: white;
+    }
+    
+    #start-btn:hover {
+      background: #2c5282;
+    }
+    
+    #stop-btn {
+      background: #e53e3e;
+      color: white;
+    }
+    
+    #stop-btn:hover {
+      background: #c53030;
+    }
+    
+    #create-btn {
+      background: #38a169;
+      color: white;
+    }
+    
+    #create-btn:hover {
+      background: #2f855a;
+    }
+    
+    #image-scan-btn {
+      background: #9f7aea;
+      color: white;
+    }
+    
+    #image-scan-btn:hover {
+      background: #805ad5;
+    }
+    
+    @media (max-width: 500px) {
+      .container {
+        padding: 18px;
+        max-width: 100%;
+      }
+      
+      #scanner {
+        min-height: 220px;
+      }
+      
+      .button-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      button {
+        width: 100%;
+        flex: none;
+      }
+    }
+  </style>
+  <!-- html5-qrcode CDN -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Universal QR & Barcode Scanner</h2>
+    <div id="scanner"></div>
+    <div id="result"></div>
+    <div class="button-container">
+      <button id="start-btn">Start Scanning</button>
+      <button id="stop-btn">Stop Scanning</button>
+      <button id="create-btn" onclick="window.location.href='https://12-two-rho.vercel.app/12.html'">Create QR Code</button>
+      <button id="image-scan-btn" onclick="window.location.href='https://12-two-rho.vercel.app'">Scan from Image</button>
+    </div>
+  </div>
+  <script>
+    let html5QrCode;
+    const scannerId = "scanner";
+    const resultDiv = document.getElementById('result');
+    const startBtn = document.getElementById('start-btn');
+    const stopBtn = document.getElementById('stop-btn');
 
-<iframe 
-  class="fullscreen-iframe"
-  src="https://12-two-rho.vercel.app/"
-  loading="lazy"
-  allowfullscreen>
-</iframe>
+    startBtn.onclick = () => {
+      resultDiv.textContent = "Starting camera...";
+      html5QrCode = new Html5Qrcode(scannerId);
+      html5QrCode.start(
+        { facingMode: "environment" },
+        { fps: 12, qrbox: 250, formatsToSupport: [
+            Html5QrcodeSupportedFormats.QR_CODE,
+            Html5QrcodeSupportedFormats.EAN_13,
+            Html5QrcodeSupportedFormats.CODE_128,
+            Html5QrcodeSupportedFormats.EAN_8,
+            Html5QrcodeSupportedFormats.CODE_39,
+            Html5QrcodeSupportedFormats.UPC_A,
+            Html5QrcodeSupportedFormats.UPC_E,
+            Html5QrcodeSupportedFormats.ITF,
+            Html5QrcodeSupportedFormats.PDF_417
+          ] },
+        (decodedText, decodedResult) => {
+          resultDiv.innerHTML = `<b>Scanned Code:</b> ${decodedText}<br><b>Format:</b> ${decodedResult.result.format.formatName}`;
+          html5QrCode.stop();
+        },
+        (errorMessage) => {}
+      ).catch(err => {
+        resultDiv.innerHTML = `<span style="color:#e53e3e;">Camera Error:</span> ${err}`;
+      });
+    };
+
+    stopBtn.onclick = () => {
+      if (html5QrCode) {
+        html5QrCode.stop().then(() => {
+          resultDiv.innerHTML = "Stopped scanning.";
+        });
+      }
+    };
+  </script>
+</body>
+</html>
