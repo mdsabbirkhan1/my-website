@@ -14,6 +14,7 @@ self.addEventListener("install", (e) => {
         "/https://cdn.jsdelivr.net/gh/mdsabbirkhan1/websitecdn@main/style.css",
         "/https://cdn.jsdelivr.net/gh/mdsabbirkhan1/websitecdn@main/styles.css",
         
+"/https://cdn.jsdelivr.net/gh/mdsabbirkhan1/websitecdn@main/icon_optimized_5.png",
         //512
       ]);
     })
