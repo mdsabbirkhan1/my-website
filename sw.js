@@ -7,7 +7,8 @@ const DYNAMIC_CACHE = 'toolhub-dynamic-v1.0.0';
 const STATIC_FILES = [
     '/',
     '/index.html',
-    '/styles.css',
+    '/https://cdn.jsdelivr.net/gh/mdsabbirkhan1/websitecdn@main/styles.css',
+'/https://cdn.jsdelivr.net/gh/mdsabbirkhan1/websitecdn@main/style.css',
     '/script.js',
     '/tools-data.js',
     '/manifest.json',
