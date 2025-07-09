@@ -11,8 +11,9 @@ self.addEventListener("install", (e) => {
         "/style.css",
         "/app.js",
         "/manifest.json",
-        "/icon.png",
-        "/icon.png"
+        "/https://cdn.jsdelivr.net/gh/mdsabbirkhan1/websitecdn@main/style.css",
+        "/https://cdn.jsdelivr.net/gh/mdsabbirkhan1/websitecdn@main/styles.css",
+        
         //512
       ]);
     })
