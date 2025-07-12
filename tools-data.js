@@ -71,7 +71,7 @@ const TOOLS_DATABASE = [
         category: 'productivity',
         description: 'All-in-one workspace for notes, tasks, wikis, and databases. Perfect for teams and individuals looking to organize their work and life.',
         icon: 'fas fa-sticky-note',
-        link: 'tool/1.html,
+        link: 'tool/1.html',
         rating: 4.8,
         badge: 'popular',
         features: ['Note-taking', 'Database management', 'Team collaboration', 'Templates'],
