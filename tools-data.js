@@ -59,6 +59,11 @@ const TOOL_CATEGORIES = {
         name: 'Automation',
         icon: 'fas fa-cogs',
         color: '#6366f1'
+    },
+    'audio': {
+        name: 'Audio Tools',
+        icon: 'fas fa-volume-up',
+        color: '#9333ea'
     }
 };
 
@@ -486,6 +491,21 @@ const TOOLS_DATABASE = [
         features: ['Device automation', 'Service integration', 'Location triggers', 'Time-based triggers', 'Custom applets'],
         pricing: 'Freemium',
         dateAdded: '2023-12-24'
+    },
+    
+    // Audio Tools
+    {
+        id: 'text-to-speech-converter',
+        name: 'Text to Speech Converter',
+        category: 'audio',
+        description: 'Converts written text into natural-sounding voice using AI-powered speech synthesis. Supports multiple languages and voices. Perfect for accessibility, presentations, or saving articles as audio. Audio can be downloaded for offline use.',
+        icon: 'fa fa-volume-up',
+        link: 'tool/1.html',
+        rating: 4.7,
+        badge: 'new',
+        features: ['Text to voice', 'TTS engine', 'Speech output', 'Multiple languages', 'Custom voice speed'],
+        pricing: 'Free',
+        dateAdded: '2024-01-23'
     }
 ];
 

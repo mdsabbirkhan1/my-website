@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Tool Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .form-group { margin: 10px 0; }
+        label { display: block; margin-bottom: 5px; }
+        input, select, textarea { width: 300px; padding: 8px; margin-bottom: 10px; }
+        button { padding: 10px 20px; margin: 5px; }
+        #output { background: #f0f0f0; padding: 20px; margin-top: 20px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>Tool Generator Test</h1>
+    
+    <div class="form-group">
+        <label>Tool Name:</label>
+        <input type="text" id="toolName" placeholder="Enter tool name">
+    </div>
+    
+    <div class="form-group">
+        <label>Tool ID:</label>
+        <input type="text" id="toolId" placeholder="Auto-generated from name">
+    </div>
+    
+    <button onclick="generateTest()">Generate</button>
+    
+    <div id="output">Output will appear here...</div>
+    
+    <script>
+        // Auto-generate ID from name
+        document.getElementById('toolName').addEventListener('input', function() {
+            const name = this.value.trim();
+            const id = name.toLowerCase()
+                .replace(/[^a-z0-9\s]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            document.getElementById('toolId').value = id;
+        });
+        
+        function generateTest() {
+            const name = document.getElementById('toolName').value;
+            const id = document.getElementById('toolId').value;
+            
+            const output = `Tool Name: ${name}\nTool ID: ${id}\n\nTest successful!`;
+            document.getElementById('output').textContent = output;
+        }
+    </script>
+</body>
+</html>

@@ -7,21 +7,35 @@
   }
 
   toggle.addEventListener("click", () => {
+    // Add switching animation
+    toggle.classList.add("switching");
+    
     document.body.classList.toggle("dark-mode");
 
-    // Save theme preference
+    // Save theme preference and update icon
     if (document.body.classList.contains("dark-mode")) {
       localStorage.setItem("theme", "dark");
-      toggle.textContent = "☀️ Light Mode";
+      toggle.innerHTML = '<i class="fas fa-sun"></i>';
+      toggle.title = "Switch to Light Mode";
     } else {
       localStorage.setItem("theme", "light");
-      toggle.textContent = "🌙 Dark Mode";
+      toggle.innerHTML = '<i class="fas fa-moon"></i>';
+      toggle.title = "Switch to Dark Mode";
     }
+    
+    // Remove animation class after animation completes
+    setTimeout(() => {
+      toggle.classList.remove("switching");
+    }, 500);
   });
 
-  // Set correct label on load
+  // Set correct icon and title on load
   window.addEventListener("DOMContentLoaded", () => {
-    toggle.textContent = document.body.classList.contains("dark-mode")
-      ? "☀️ Light Mode"
-      : "🌙 Dark Mode";
+    if (document.body.classList.contains("dark-mode")) {
+      toggle.innerHTML = '<i class="fas fa-sun"></i>';
+      toggle.title = "Switch to Light Mode";
+    } else {
+      toggle.innerHTML = '<i class="fas fa-moon"></i>';
+      toggle.title = "Switch to Dark Mode";
+    }
   });
