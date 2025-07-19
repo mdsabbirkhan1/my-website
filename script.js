@@ -660,6 +660,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Independent Search Bar Logic (not using 'soup')
+document.addEventListener('DOMContentLoaded', function() {
+  const independentSearchInput = document.getElementById('independentSearchInput');
+  const independentClearSearch = document.getElementById('independentClearSearch');
+  if (independentSearchInput && independentClearSearch) {
+    independentSearchInput.addEventListener('input', function(e) {
+      // Only log the value, do not interact with main search or soup
+      console.log('Independent Search:', e.target.value);
+      if (e.target.value.trim()) {
+        independentClearSearch.style.opacity = '1';
+        independentClearSearch.style.pointerEvents = 'auto';
+      } else {
+        independentClearSearch.style.opacity = '0';
+        independentClearSearch.style.pointerEvents = 'none';
+      }
+    });
+    independentClearSearch.addEventListener('click', function() {
+      independentSearchInput.value = '';
+      independentClearSearch.style.opacity = '0';
+      independentClearSearch.style.pointerEvents = 'none';
+      independentSearchInput.focus();
+      // Log clear action
+      console.log('Independent Search cleared');
+    });
+    // Initialize clear button state
+    independentClearSearch.style.opacity = '0';
+    independentClearSearch.style.pointerEvents = 'none';
+  }
+});
+
 // Service Worker registration for PWA capabilities
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

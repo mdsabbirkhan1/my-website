@@ -30,11 +30,14 @@
   </div>
     
     
-    <!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="dark-toggle">
-  🌙 Dark Mode
-</button>
-    
+    <!-- Adsterra Banner Ad (Above Main Search Bar) -->
+    <div id="adsterra-banner" style="width:100%;text-align:center;margin:16px 0;">
+      <!-- Adsterra Banner Script Placeholder -->
+      <script type="text/javascript">
+        // Adsterra script goes here
+      </script>
+      <span style="background:#eee;padding:8px 24px;border-radius:8px;display:inline-block;">Adsterra Banner Ad</span>
+    </div>
     
     <!-- Header -->
     <header class="header">
@@ -46,7 +49,6 @@
                 </h1>
                 <p class="brand__subtitle">Discover the Best Tools</p>
             </div>
-            
             <div class="nav__actions">
                 <button class="btn btn--secondary" id="submitTool">
                     <i class="fas fa-plus"></i>
@@ -56,30 +58,45 @@
                     <i class="fas fa-bell"></i>
                     Subscribe
                 </button>
+                <!-- Move Dark Mode Toggle Here -->
+                <button id="darkModeToggle" class="dark-toggle" style="margin-left:16px;">
+                  🌙 Dark Mode
+                </button>
             </div>
         </nav>
-        
-        
-        
-        <!-- Search Bar -->
-                <div class="search__container">
-                    <div class="search__wrapper">
-                        <i class="fas fa-search search__icon"></i>
-                        <input 
-                            type="text" 
-                            class="search__input" 
-                            placeholder="Search tools, categories, or descriptions..."
-                            id="searchInput"
-                            autocomplete="off"
-                        >
-                        <button class="search__clear" id="clearSearch">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-        
-        
+        <!-- Main Search Bar (existing) -->
+        <div class="search__container">
+            <div class="search__wrapper">
+                <i class="fas fa-search search__icon"></i>
+                <input 
+                    type="text" 
+                    class="search__input" 
+                    placeholder="Search tools, categories, or descriptions..."
+                    id="searchInput"
+                    autocomplete="off"
+                >
+                <button class="search__clear" id="clearSearch">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
     </header>
+    <!-- Independent Search Bar (not using 'soup') -->
+    <div class="search__container" style="margin: 24px auto; max-width: 600px;">
+      <div class="search__wrapper">
+        <i class="fas fa-search search__icon"></i>
+        <input 
+          type="text" 
+          class="search__input" 
+          placeholder="Independent Search..." 
+          id="independentSearchInput"
+          autocomplete="off"
+        >
+        <button class="search__clear" id="independentClearSearch">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
