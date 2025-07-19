@@ -18,6 +18,106 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="ToolHub">
     <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/mdsabbirkhan1/websitecdn@main/icon_optimized_5.png">
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Ad Banner Styles */
+        .ad-banner-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 15px;
+        }
+        
+        .ad-banner {
+            max-width: 728px;
+            width: 100%;
+            min-height: 90px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ad-fallback {
+            color: #6c757d;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        /* Dark mode ad banner */
+        .dark-mode .ad-banner {
+            background: #2d3748;
+            border-color: #4a5568;
+        }
+        
+        .dark-mode .ad-fallback {
+            color: #a0aec0;
+        }
+        
+        /* Responsive ad banner */
+        @media (max-width: 768px) {
+            .ad-banner-container {
+                padding: 10px;
+                margin: 15px 0;
+            }
+            
+            .ad-banner {
+                min-height: 70px;
+            }
+        }
+        
+        /* Improved Dark Mode Toggle */
+        .dark-toggle {
+            background: transparent;
+            border: 2px solid #e2e8f0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            color: #4a5568;
+        }
+        
+        .dark-toggle:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+            transform: scale(1.1);
+        }
+        
+        .dark-mode .dark-toggle {
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .dark-toggle:hover {
+            background: #2d3748;
+            border-color: #718096;
+        }
+        
+        .dark-toggle i {
+            font-size: 16px;
+        }
+        
+        /* Animation for theme transition */
+        .dark-toggle.switching {
+            animation: toggleSpin 0.5s ease-in-out;
+        }
+        
+        @keyframes toggleSpin {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     
@@ -28,12 +128,6 @@
     <button id="installBtn">Install</button>
     <button id="closeBtn">X</button>
   </div>
-    
-    
-    <!-- Dark Mode Toggle -->
-<button id="darkModeToggle" class="dark-toggle">
-  🌙 Dark Mode
-</button>
     
     
     <!-- Header -->
@@ -48,6 +142,10 @@
             </div>
             
             <div class="nav__actions">
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" class="dark-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
                 <button class="btn btn--secondary" id="submitTool">
                     <i class="fas fa-plus"></i>
                     Submit Tool
@@ -89,6 +187,29 @@
                 <p class="hero__description">
                     
                 </p>
+                
+                <!-- Adsterra Banner Ad -->
+                <div class="ad-banner-container">
+                    <div class="ad-banner" id="adsterra-banner">
+                        <!-- Adsterra Banner Code - Replace with your actual banner code -->
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : 'YOUR_ADSTERRA_KEY_HERE',
+                                'format' : 'iframe',
+                                'height' : 90,
+                                'width' : 728,
+                                'params' : {}
+                            };
+                            document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/YOUR_ADSTERRA_KEY_HERE/invoke.js"></scr' + 'ipt>');
+                        </script>
+                        <!-- Fallback for ad blockers -->
+                        <noscript>
+                            <div class="ad-fallback">
+                                <p>Advertisement</p>
+                            </div>
+                        </noscript>
+                    </div>
+                </div>
                 
                 <!-- Search Bar -->
                 <div class="search__container">

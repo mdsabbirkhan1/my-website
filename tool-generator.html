@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Data Generator - ToolHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .form-section {
+            padding: 40px;
+            background: #f8fafc;
+        }
+
+        .output-section {
+            padding: 40px;
+            background: #1e293b;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .features-input {
+            margin-bottom: 10px;
+        }
+
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .feature-tag {
+            background: #6366f1;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .feature-tag .remove {
+            cursor: pointer;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .feature-tag .remove:hover {
+            opacity: 1;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: #64748b;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+            box-shadow: 0 10px 25px rgba(100, 116, 139, 0.3);
+        }
+
+        .output-header {
+            margin-bottom: 20px;
+        }
+
+        .output-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .output-content {
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #334155;
+            position: relative;
+        }
+
+        .output-text {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #22c55e;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #16a34a;
+        }
+
+        .copy-btn.copied {
+            background: #059669;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .instructions {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .instructions h4 {
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+
+        .instructions p {
+            color: #b45309;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-section,
+            .output-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-tools"></i> Tool Data Generator</h1>
+            <p>Generate properly formatted tool data for tools-data.js</p>
+        </div>
+
+        <div class="content">
+            <div class="form-section">
+                <div class="instructions">
+                    <h4><i class="fas fa-info-circle"></i> Instructions</h4>
+                    <p>Fill in all the required fields below. The generator will create the properly formatted JavaScript object that you can copy and paste into your tools-data.js file.</p>
+                </div>
+
+                <form id="toolForm">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="toolId">Tool ID*</label>
+                            <input type="text" id="toolId" placeholder="e.g., text-to-speech-converter" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="toolName">Tool Name*</label>
+                            <input type="text" id="toolName" placeholder="e.g., Text to Speech Converter" required>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="category">Category*</label>
+                            <select id="category" required>
+                                <option value="">Select Category</option>
+                                <option value="productivity">Productivity</option>
+                                <option value="development">Developer Tools</option>
+                                <option value="design">Design</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="ai">AI & Machine Learning</option>
+                                <option value="communication">Communication</option>
+                                <option value="analytics">Analytics</option>
+                                <option value="security">Security</option>
+                                <option value="education">Education</option>
+                                <option value="finance">Finance</option>
+                                <option value="automation">Automation</option>
+                                <option value="audio">Audio Tools</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="icon">Icon Class*</label>
+                            <input type="text" id="icon" placeholder="e.g., fas fa-volume-up" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description*</label>
+                        <textarea id="description" placeholder="Detailed description of the tool..." required></textarea>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="link">Link/URL*</label>
+                            <input type="text" id="link" placeholder="e.g., tool/1.html or https://example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rating">Rating (1-5)*</label>
+                            <input type="number" id="rating" min="1" max="5" step="0.1" placeholder="4.7" required>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="badge">Badge (Optional)</label>
+                            <select id="badge">
+                                <option value="">No Badge</option>
+                                <option value="new">New</option>
+                                <option value="popular">Popular</option>
+                                <option value="featured">Featured</option>
+                                <option value="trending">Trending</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pricing">Pricing*</label>
+                            <select id="pricing" required>
+                                <option value="">Select Pricing</option>
+                                <option value="Free">Free</option>
+                                <option value="Freemium">Freemium</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Premium">Premium</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="featureInput">Features*</label>
+                        <input type="text" id="featureInput" placeholder="Type a feature and press Enter" class="features-input">
+                        <div class="features-list" id="featuresList"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateAdded">Date Added*</label>
+                        <input type="date" id="dateAdded" required>
+                    </div>
+
+                    <div>
+                        <button type="button" class="btn" onclick="generateToolData()">
+                            <i class="fas fa-magic"></i> Generate Tool Data
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearForm()">
+                            <i class="fas fa-broom"></i> Clear Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="output-section">
+                <div class="output-header">
+                    <h3><i class="fas fa-code"></i> Generated Code</h3>
+                    <p>Copy this code and add it to your tools-data.js file</p>
+                </div>
+
+                <div class="output-content">
+                    <button class="copy-btn" onclick="copyToClipboard()">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <div class="output-text" id="outputText">
+// Fill in the form to generate tool data...
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h4><i class="fas fa-lightbulb"></i> Usage Instructions:</h4>
+                    <ol style="margin-left: 20px; margin-top: 10px; line-height: 1.6;">
+                        <li>Copy the generated code above</li>
+                        <li>Open your tools-data.js file</li>
+                        <li>Find the end of the TOOLS_DATABASE array</li>
+                        <li>Add a comma after the last tool object</li>
+                        <li>Paste the generated code before the closing bracket ]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set today's date as default
+        document.getElementById('dateAdded').valueAsDate = new Date();
+
+        // Features management
+        const featuresArray = [];
+
+        document.getElementById('featureInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addFeature();
+            }
+        });
+
+        function addFeature() {
+            const input = document.getElementById('featureInput');
+            const feature = input.value.trim();
+            
+            if (feature && !featuresArray.includes(feature)) {
+                featuresArray.push(feature);
+                updateFeaturesList();
+                input.value = '';
+            }
+        }
+
+        function removeFeature(index) {
+            featuresArray.splice(index, 1);
+            updateFeaturesList();
+        }
+
+        function updateFeaturesList() {
+            const container = document.getElementById('featuresList');
+            container.innerHTML = featuresArray.map((feature, index) => 
+                `<div class="feature-tag">
+                    ${feature}
+                    <span class="remove" onclick="removeFeature(${index})">&times;</span>
+                </div>`
+            ).join('');
+        }
+
+        function generateToolData() {
+            const form = document.getElementById('toolForm');
+            const formData = new FormData(form);
+            
+            // Get form values
+            const toolId = document.getElementById('toolId').value.trim();
+            const toolName = document.getElementById('toolName').value.trim();
+            const category = document.getElementById('category').value;
+            const description = document.getElementById('description').value.trim();
+            const icon = document.getElementById('icon').value.trim();
+            const link = document.getElementById('link').value.trim();
+            const rating = parseFloat(document.getElementById('rating').value);
+            const badge = document.getElementById('badge').value;
+            const pricing = document.getElementById('pricing').value;
+            const dateAdded = document.getElementById('dateAdded').value;
+
+            // Validate required fields
+            if (!toolId || !toolName || !category || !description || !icon || !link || !rating || !pricing || !dateAdded || featuresArray.length === 0) {
+                alert('Please fill in all required fields and add at least one feature.');
+                return;
+            }
+
+            // Generate the tool object
+            const toolObject = {
+                id: toolId,
+                name: toolName,
+                category: category,
+                description: description,
+                icon: icon,
+                link: link,
+                rating: rating,
+                features: featuresArray,
+                pricing: pricing,
+                dateAdded: dateAdded
+            };
+
+            // Add badge if provided
+            if (badge) {
+                toolObject.badge = badge;
+            }
+
+            // Format as JavaScript code
+            let output = '{\n';
+            output += `    id: '${toolObject.id}',\n`;
+            output += `    name: '${toolObject.name}',\n`;
+            output += `    category: '${toolObject.category}',\n`;
+            output += `    description: '${toolObject.description.replace(/'/g, "\\'")}',\n`;
+            output += `    icon: '${toolObject.icon}',\n`;
+            output += `    link: '${toolObject.link}',\n`;
+            output += `    rating: ${toolObject.rating},\n`;
+            
+            if (toolObject.badge) {
+                output += `    badge: '${toolObject.badge}',\n`;
+            }
+            
+            output += `    features: [${toolObject.features.map(f => `'${f.replace(/'/g, "\\'")}'`).join(', ')}],\n`;
+            output += `    pricing: '${toolObject.pricing}',\n`;
+            output += `    dateAdded: '${toolObject.dateAdded}'\n`;
+            output += '}';
+
+            document.getElementById('outputText').textContent = output;
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText').textContent;
+            const copyBtn = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(outputText).then(() => {
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = outputText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function clearForm() {
+            document.getElementById('toolForm').reset();
+            featuresArray.length = 0;
+            updateFeaturesList();
+            document.getElementById('outputText').textContent = '// Fill in the form to generate tool data...';
+            document.getElementById('dateAdded').valueAsDate = new Date();
+        }
+
+        // Auto-generate ID from name
+        document.getElementById('toolName').addEventListener('input', function() {
+            const name = this.value.trim();
+            const id = name.toLowerCase()
+                .replace(/[^a-z0-9\s]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            document.getElementById('toolId').value = id;
+        });
+    </script>
+</body>
+</html>
