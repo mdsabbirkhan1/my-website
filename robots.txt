@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Allow: /
+
+Sitemap: https://my-website-tawny-nine.vercel.app/sitemap.xml
