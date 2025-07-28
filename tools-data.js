@@ -373,7 +373,7 @@ const TOOLS_DATABASE = [
     icon: 'fa fa-qrcode',
     link: 'tool/12.html',
     rating: 4.5,
-    
+    badge: 'offline Use',
     features: [
         'Text to QR',
         'Live preview',
